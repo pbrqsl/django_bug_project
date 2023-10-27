@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import generics
+from rest_framework.renderers import JSONRenderer
 from django.views.decorators.http import require_GET
 
 
@@ -19,6 +20,8 @@ class BugsApiView(generics.ListAPIView):
     http_method_names = ['get']
     project_id = None
     user_id = None
+
+    renderer_classes = [JSONRenderer]
 
     def user_exists(self, id):
         return User.objects.filter(id=id).exists()
